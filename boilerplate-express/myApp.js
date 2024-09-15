@@ -3,6 +3,14 @@ require("dotenv").config(); // Challenge 6
 let express = require("express");
 let app = express();
 
+// Challenge 9
+
+// e.g. your-app-rootpath/freecodecamp/echo.
+
+app.get("/:word/echo", (req, res) => {
+  res.json({ echo: req.params.word });
+});
+
 // Challenge 8
 
 app.get(
