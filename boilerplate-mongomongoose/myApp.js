@@ -80,7 +80,12 @@ const findAndUpdate = (personName, done) => {
 };
 
 const removeById = (personId, done) => {
-  done(null /*, data*/);
+  // Use findByIdAndRemove to delete a person by _id
+  Person.findByIdAndRemove(personId, (err, removedPerson) => {
+    if (err) return done(err);
+
+    done(null, removedPerson); // Pass the removed document to the callback
+  });
 };
 
 const removeManyPeople = (done) => {
