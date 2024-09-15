@@ -3,6 +3,19 @@ require("dotenv").config(); // Challenge 6
 let express = require("express");
 let app = express();
 
+// Challenge 8
+
+app.get(
+  "/now",
+  function (req, res, next) {
+    req.time = new Date().toString();
+    next();
+  },
+  function (req, res) {
+    res.json({ time: req.time });
+  }
+);
+
 // Challenge 7
 
 app.use((req, res, next) => {
