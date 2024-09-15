@@ -3,6 +3,10 @@ require("dotenv").config(); // Challenge 6
 let express = require("express");
 let app = express();
 
+// Challenge 11
+const bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: false }));
+
 // Challenge 10
 
 // e.g. ?first=firstname&last=lastname.
