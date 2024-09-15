@@ -97,11 +97,18 @@ const removeManyPeople = (done) => {
 };
 
 const queryChain = (done) => {
-  const foodToSearch = "burrito";
+  const foodToSearch = "burrito"; // or set dynamically based on your needs
 
-  done(null /*, data*/);
+  Person.find({ favoriteFoods: foodToSearch })
+    .sort({ name: 1 }) // Sort by name in ascending order
+    .limit(2) // Limit results to 2 documents
+    .select("-age") // Exclude the age field
+    .exec((err, data) => {
+      // Execute the query and handle the result
+      if (err) return done(err); // Pass any errors to the callback
+      done(null, data); // Pass the result data to the callback
+    });
 };
-
 /** **Well Done !!**
 /* You completed these challenges, let's go celebrate !
  */
