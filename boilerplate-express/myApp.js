@@ -11,18 +11,32 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // e.g. ?first=firstname&last=lastname.
 
-app.route("/name").get((req, res) => {
-  const firstName = req.query.first;
-  const lastName = req.query.last;
+app
+  .route("/name")
+  .get((req, res) => {
+    const firstName = req.query.first;
+    const lastName = req.query.last;
 
-  if (!firstName || !lastName) {
-    return res
-      .status(400)
-      .json({ error: "First and last name are required in query string" });
-  }
+    if (!firstName || !lastName) {
+      return res
+        .status(400)
+        .json({ error: "First and last name are required in query string" });
+    }
 
-  res.json({ name: `${firstName} ${lastName}` });
-});
+    res.json({ name: `${firstName} ${lastName}` });
+  })
+  .post((req, res) => {
+    // Challenge 12
+    const { first, last } = req.body;
+
+    if (!first || !last) {
+      return res.status(400).json({
+        error: "First and last name are required in the request body",
+      });
+    }
+
+    res.json({ name: `${first} ${last}` });
+  });
 
 // Challenge 9
 
