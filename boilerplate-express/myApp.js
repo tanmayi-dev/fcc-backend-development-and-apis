@@ -1,6 +1,11 @@
 let express = require("express");
 let app = express();
 
+// Challenge 4
+const staticFile = __dirname + "/public";
+
+app.use("/public", express.static(staticFile));
+
 // Challenge 3
 const filePath = __dirname + "/views/index.html";
 
