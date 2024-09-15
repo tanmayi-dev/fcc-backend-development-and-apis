@@ -3,6 +3,13 @@ require("dotenv").config(); // Challenge 6
 let express = require("express");
 let app = express();
 
+// Challenge 7
+
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.path} - ${req.ip}`);
+  next();
+});
+
 // Challenge 6
 
 app.get("/json", (req, res) => {
