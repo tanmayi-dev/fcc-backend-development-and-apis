@@ -51,7 +51,17 @@ const findPersonById = (personId, done) => {
 const findEditThenSave = (personId, done) => {
   const foodToAdd = "hamburger";
 
-  done(null /*, data*/);
+  Person.findById(personId, (err, person) => {
+    if (err) return done(err);
+    person.favoriteFoods.push(foodToAdd);
+    person.markModified("favoriteFoods");
+
+    person.save((err, updatedPerson) => {
+      if (err) return done(err);
+
+      done(null, updatedPerson);
+    });
+  });
 };
 
 const findAndUpdate = (personName, done) => {
@@ -82,6 +92,7 @@ const queryChain = (done) => {
 
 //----- **DO NOT EDIT BELOW THIS LINE** ----------------------------------
 
+//https: exports.PersonModel = Person;
 exports.PersonModel = Person;
 exports.createAndSavePerson = createAndSavePerson;
 exports.findPeopleByName = findPeopleByName;
