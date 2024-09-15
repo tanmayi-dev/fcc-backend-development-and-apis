@@ -3,6 +3,23 @@ require("dotenv").config(); // Challenge 6
 let express = require("express");
 let app = express();
 
+// Challenge 10
+
+// e.g. ?first=firstname&last=lastname.
+
+app.route("/name").get((req, res) => {
+  const firstName = req.query.first;
+  const lastName = req.query.last;
+
+  if (!firstName || !lastName) {
+    return res
+      .status(400)
+      .json({ error: "First and last name are required in query string" });
+  }
+
+  res.json({ name: `${firstName} ${lastName}` });
+});
+
 // Challenge 9
 
 // e.g. your-app-rootpath/freecodecamp/echo.
