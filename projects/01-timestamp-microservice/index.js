@@ -23,15 +23,22 @@ app.get("/api/hello", function (req, res) {
   res.json({ greeting: "hello API" });
 });
 
-app.get("/api/:date", (req, res) => {
+// TASK
+app.get("/api/:date?", (req, res) => {
   const { date } = req.params;
 
   let inputDate;
 
+  // If no date is provided, use the current date
+  if (!date) {
+    inputDate = new Date();
+  }
   // Check if the input is a valid timestamp (numeric)
-  if (!isNaN(date)) {
+  else if (!isNaN(date)) {
     inputDate = new Date(parseInt(date));
-  } else {
+  }
+  // Otherwise, try to parse it as a date string
+  else {
     inputDate = new Date(date);
   }
 
