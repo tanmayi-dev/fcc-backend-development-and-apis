@@ -22,15 +22,11 @@ app.get("/", function (req, res) {
 // API route to return header info
 app.get("/api/whoami", (req, res) => {
   const ipaddress =
-    req.ip || req.headers["x-forwarded-for"] || req.connection.remoteAddress;
-  const language = req.headers["accept-language"];
-  const software = req.headers["user-agent"];
+    req.headers["x-forwarded-for"]?.split(",")[0] || req.socket.remoteAddress;
+  const language = req.headers["accept-language"] || "Not specified";
+  const software = req.headers["user-agent"] || "Not specified";
 
-  res.json({
-    ipaddress,
-    language,
-    software,
-  });
+  res.json({ ipaddress, language, software });
 });
 
 // your first API endpoint...
